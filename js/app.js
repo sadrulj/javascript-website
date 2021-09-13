@@ -1,3 +1,4 @@
+// api details
 const loadProducts = () => {
   const data = [
     {
@@ -225,7 +226,7 @@ const showProducts = (products) => {
         <p>Category: ${product.category}</p>
         <small class='p-1 rounded me-3 bg-warning'>Avg. Rating: ${
           product.rating.rate
-        }</small>  <small class='p-1 rounded ms-3 bg-warning'>Total Count: ${
+        }</small> <small class='p-1 rounded ms-3 bg-warning'>Total Count: ${
       product.rating.count
     }</small>
         <h2>Price: $ ${product.price}</h2>
