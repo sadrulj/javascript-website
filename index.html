@@ -29,7 +29,7 @@
       <div class="input-group mb-3 w-25 mx-auto my-5">
         <input id="input-field" class="form-control" type="text" placeholder="Search" />
         <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off"
-          id="search-btn" onclick="searchProduct()">
+          id="search-btn" onclick="loadProducts()">
           Search
         </button>
       </div>
@@ -50,14 +50,14 @@
               </div>
               <!-- Button modal -->
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
                 <button type="button" class="btn btn-primary">add to cart</button>
               </div>
             </div>
           </div>
         </div>
         <!-- load all product -->
-        <div id="all-products" class="shadow d-grid gap-3">
+        <div id="all-products" class="">
         </div>
       </div>
       <!-- cart info -->
