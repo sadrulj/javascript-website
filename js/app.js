@@ -217,20 +217,21 @@ const showProducts = (products) => {
     const image = product.image;
     const div = document.createElement("div");
     div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
+    div.innerHTML = `<div class="single-product gap-3">
       <div>
-    <img class="product-image" src=${image}></img>
+        <img class="product-image" src=${image}></img>
       </div>
-      <h3>${product.title}</h3>
-      <p>Category: ${product.category}</p>
-      <small>Rating: ${product.rating.rate}</small><small>Count: ${product.rating.count}</small>
-      <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+        <h3>${product.title}</h3>
+        <p>Category: ${product.category}</p>
+        <small class='me-3'>Avg. Rating: ${product.rating.rate}</small>  <small class='ms-3'>Total Count: ${product.rating.count}</small>
+        <h2>Price: $ ${product.price}</h2>
+        <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
+        <button onclick="loadProductDetail(${product.id})" id="details-btn" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button></div>
       `;
     document.getElementById("all-products").appendChild(div);
   }
 };
+
 let count = 0;
 // onClick add to cart button
 const addToCart = (id, price) => {
@@ -243,6 +244,37 @@ const addToCart = (id, price) => {
   updateTotal();
 };
 
+const loadProductDetail = (id) => {
+  const url = `https://fakestoreapi.com/products/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((products) => displaySingleProducts(products));
+};
+
+const displaySingleProducts = (products) => {
+  // console.log(product);
+  const displayDetails = document.getElementById("displayCard");
+  displayDetails.textContent = "";
+  const div = document.createElement("div");
+  div.classList.add("row");
+  div.innerHTML = `
+            <div class="col-md-4 p-4 card-body">
+              <img src="${products.image}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8 p-4">
+              <div class="card-body">
+                <h2 class="card-title">${products.title}</h2>
+                <h3 class="card-text">Category: ${products.category}</h3>
+                <p class="card-text"><span class='fw-bold'>Description:</span> ${products.description}</p>
+                <h1 class="card-text">Price:$ ${products.price}</h1>
+                <p class="card-text d-flex justify-content-between"><small class="text-muted ms-2">Avg. Rating: ${products.rating.rate}</small><small class="text-muted me-3">Total Rating: ${products.rating.count}</small></p>
+              </div>
+            </div>
+            
+          </div>
+    `;
+  displayDetails.appendChild(div);
+};
 const getInputValue = (id) => {
   const element = document.getElementById(id).innerText;
   const converted = parseFloat(element);
